@@ -1,6 +1,7 @@
 "use strict";
 (function() {
 	let currentCategory;
+	var alreadySelected = false;
 
 	window.onload = function() {
 		$("view-all").onclick = fetchCategories;
@@ -11,11 +12,18 @@
 		
 		// use fetch HTTP request to get the categories
 		// call displayCategories
-
-		let hxr = new XMLHttpRequest()     
-		hrx.onload = displayCategories;     
-		hrx.open("GET", "trivia.php?mode=categories");     
-		hrx.send();  
+	
+		if (alreadySelected == false){ 
+			document.getElementById("category-view").style.display = 'block';
+			document.getElementById("categories-heading").style.display = 'block';
+			document.getElementById("question-view").style.display = 'block';
+			
+			let hrx = new XMLHttpRequest();  
+			hrx.open("GET", "trivia.php?mode=categories");
+			hrx.onload = displayCategories;  
+			hrx.send();  
+			alreadySelected = true;
+		}
 		
 	}
 
@@ -23,6 +31,13 @@
 		
 		// your code here
 		
+		document.getElementById("card").style.display = 'block';
+		
+		if (document.getElementById("Question")){
+			var Question = document.getElementById('Question');
+			Question.remove(); 
+		}
+		showTrivia();
 		
 	}
 
@@ -31,7 +46,7 @@
 	function showTrivia() {
 		let url = "trivia.php?mode=category";
 		if (currentCategory) {
-		url += "&name=" + currentCategory;
+			url += "&name=" + currentCategory;
 		}
 		fetch(url)
 		.then(checkStatus)
@@ -44,15 +59,31 @@
 		//your code here
 		
 		
+		var outside = document.getElementById("card");
+		var temp = document.createElement("id"); 
+		temp.id = "Question";
+		var p = document.createElement("p");
+		p.appendChild(document.createTextNode(response));
+		temp.appendChild(p);
+		outside.appendChild(temp);
+		
+		
 	}
 
 	function displayCategories() {
-
-		let categories = JSON.parse(this.responseText)["categories"];
-
-		let ul = $("categories");
 		
-		// your code here
+		if (this.readyState == 4 && this.status == 200) {
+			var myArr = JSON.parse(this.responseText);
+			for (var i = 0; i < myArr.length; i++) {
+				var ul = document.getElementById("categories");
+				var li = document.createElement("li");
+				var temp = document.createElement("id"); 
+				temp.id = myArr[i];
+				li.appendChild(document.createTextNode(myArr[i]));
+				temp.appendChild(li);
+				ul.appendChild(temp);
+			}
+		}
 		
 	}
 

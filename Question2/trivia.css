@@ -28,8 +28,8 @@ main {
 button {
 	border: solid 2px #0aa;
 	margin: 20px auto;
-  padding: 6px;
-  width: 140px;
+	padding: 6px;
+	width: 140px;
 }
 
 ul {
@@ -50,5 +50,5 @@ li:hover {
 }
 
 .hidden {
-  display: none;
+	display: none;
 }
