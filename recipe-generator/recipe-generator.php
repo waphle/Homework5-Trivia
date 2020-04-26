@@ -3,7 +3,7 @@
 error_reporting(E_ALL);
 
 # Example Output:
- 
+
 # Mowgli's Muffin
 # Recipe:
 # In a bowl, mix:
@@ -12,7 +12,7 @@ error_reporting(E_ALL);
 #   1 oz of Green peas
 #   1 Lentil
 #   1 Ice cube
-# 
+#
 # Cook for 6 minutes and serve!
 
 # 1. Check whether the correct parameter(s) are set, printing a helpful error message
@@ -31,6 +31,10 @@ function generate_recipe($name) {
   # 5. Generate a list of ingredients for each letter in the name (each on a new line)
 
   # 6. Print final step based on name length (see spec).
+
+  $myfile = fopen("webdictionary.txt", "r") or die("Unable to open file!");
+  echo fread($myfile,filesize("webdictionary.txt"));
+  fclose($myfile);
 }
 
 
@@ -38,7 +42,7 @@ function generate_recipe_name($name) {
   # implement me!
 }
 
-function generate_ingredients($name) { 
+function generate_ingredients($name) {
   # implement me!
 }
 
@@ -56,7 +60,7 @@ function output_ingredient_intro() {
 # Pre: $letter is a single alphabetical letter
 function get_random_line_from_letter($folder_name, $letter) {
   # Remember that file returns an array of all of the lines in a file
-  # implement me (replace "" with the necessary value to get the file as an array of lines)! 
+  # implement me (replace "" with the necessary value to get the file as an array of lines)!
   $choices = file("");
 
   # array_rand is a function that returns a random element from an array
